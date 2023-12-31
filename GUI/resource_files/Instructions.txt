@@ -1,0 +1,13 @@
+INSTRUCTIONS:
+
+1. Place the Map to the Camera before starting the game.
+   
+2. Once the Map is in place, Emojis will be displayed representing a specific country.
+   
+3. Your task is to guess the country and point to it on the Map.
+   
+4. For a Hint, use two fingers.
+   
+5. To pause or resume the game, use five fingers.
+
+Enjoy the game!
