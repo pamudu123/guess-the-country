@@ -2,8 +2,7 @@ from introWindow import Ui_IntroWindow
 from PySide6.QtWidgets import QApplication,QMainWindow
 from PySide6.QtCore import Qt
 
-from game2_window import GameWindow
-
+from game_window import GameWindow
 
 class IntroWindow(QMainWindow, Ui_IntroWindow):
     def __init__(self):

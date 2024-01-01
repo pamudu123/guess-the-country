@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainwindow.ui'
+## Form generated from reading UI file 'gamewindow.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.6.0
 ##
@@ -16,30 +16,25 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QLabel,
-    QMainWindow, QPushButton, QSizePolicy, QSpacerItem,
-    QTextEdit, QVBoxLayout, QWidget)
+    QMainWindow, QSizePolicy, QSpacerItem, QTextEdit,
+    QVBoxLayout, QWidget)
 
 class Ui_GameWindow(object):
-    def setupUi(self, MainWindow):
-        if not MainWindow.objectName():
-            MainWindow.setObjectName(u"MainWindow")
-        MainWindow.setEnabled(True)
-        MainWindow.resize(797, 552)
+    def setupUi(self, GameWindow):
+        if not GameWindow.objectName():
+            GameWindow.setObjectName(u"GameWindow")
+        GameWindow.setEnabled(True)
+        GameWindow.resize(797, 552)
         font = QFont()
         font.setBold(True)
-        MainWindow.setFont(font)
-        MainWindow.setWindowTitle(u"Guess the Country")
-        self.centralwidget = QWidget(MainWindow)
+        GameWindow.setFont(font)
+        GameWindow.setWindowTitle(u"Guess the Country")
+        self.centralwidget = QWidget(GameWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.centralwidget.setStyleSheet(u"background-color: rgb(255, 255, 255);")
         self.gridLayout = QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setContentsMargins(15, -1, 15, -1)
-        self.hint_btn = QPushButton(self.centralwidget)
-        self.hint_btn.setObjectName(u"hint_btn")
-
-        self.gridLayout.addWidget(self.hint_btn, 7, 1, 1, 1)
-
         self.verticalLayout_2 = QVBoxLayout()
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -120,16 +115,6 @@ class Ui_GameWindow(object):
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer_2)
 
-        self.next_btn = QPushButton(self.centralwidget)
-        self.next_btn.setObjectName(u"next_btn")
-
-        self.horizontalLayout_2.addWidget(self.next_btn)
-
-        self.pause_btn = QPushButton(self.centralwidget)
-        self.pause_btn.setObjectName(u"pause_btn")
-
-        self.horizontalLayout_2.addWidget(self.pause_btn)
-
 
         self.verticalLayout.addLayout(self.horizontalLayout_2)
 
@@ -172,28 +157,25 @@ class Ui_GameWindow(object):
 
         self.gridLayout.addWidget(self.live_video_label, 1, 0, 1, 1)
 
-        MainWindow.setCentralWidget(self.centralwidget)
+        GameWindow.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(MainWindow)
+        self.retranslateUi(GameWindow)
 
-        QMetaObject.connectSlotsByName(MainWindow)
+        QMetaObject.connectSlotsByName(GameWindow)
     # setupUi
 
-    def retranslateUi(self, MainWindow):
-        self.hint_btn.setText(QCoreApplication.translate("MainWindow", u"Hint", None))
+    def retranslateUi(self, GameWindow):
         self.emoji_label.setText("")
-        self.timer_label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\"></span></p></body></html>", None))
-        self.hint_txt.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.timer_label.setText(QCoreApplication.translate("GameWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\"></span></p></body></html>", None))
+        self.hint_txt.setHtml(QCoreApplication.translate("GameWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Symbolized by the Statue of Liberty, representing freedom and democracy. The bald eagle signifies strength and freedom. Hamburgers are iconic in cuisine, and corn is a staple crop.</span></p></body></html>", None))
-        self.n_correct_label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">12</span></p></body></html>", None))
-        self.n_wrong_label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">12</span></p></body></html>", None))
-        self.next_btn.setText(QCoreApplication.translate("MainWindow", u"next_btn", None))
-        self.pause_btn.setText(QCoreApplication.translate("MainWindow", u"pause_btn", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">GUESS THE COUNTRY</p></body></html>", None))
-        self.status_label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">Game status</p></body></html>", None))
+        self.n_correct_label.setText(QCoreApplication.translate("GameWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">12</span></p></body></html>", None))
+        self.n_wrong_label.setText(QCoreApplication.translate("GameWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">12</span></p></body></html>", None))
+        self.label.setText(QCoreApplication.translate("GameWindow", u"<html><head/><body><p align=\"center\">GUESS THE COUNTRY</p></body></html>", None))
+        self.status_label.setText(QCoreApplication.translate("GameWindow", u"<html><head/><body><p align=\"center\">Game status</p></body></html>", None))
         self.live_video_label.setText("")
         pass
     # retranslateUi

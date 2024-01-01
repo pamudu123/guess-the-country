@@ -1,10 +1,9 @@
-from PySide6.QtCore import QRunnable, Slot
-from worker_signals import WorkerSignals
 import cv2
-import numpy as np
 import mediapipe as mp
 from ultralytics import YOLO
-import time
+
+from PySide6.QtCore import QRunnable, Slot
+from worker_signals import WorkerSignals
 
 # custom scripts
 import args
@@ -30,10 +29,9 @@ class VideoFeedThread(QRunnable):
 
     @Slot()
     def run_realtime(self):
-        # IP = 'http://192.168.1.3:8080/video'
-        x = r'd8.avi'
+        self.cap = cv2.VideoCapture(r'/home/pamudu/Desktop/Other_Projects/guess-the-country/GUI/d8.avi')
+        # self.cap = cv2.VideoCapture(args.CAMERA_IP)
 
-        self.cap = cv2.VideoCapture(x)
         mask_available = False
 
         # Initialize Mediapipe Hand module
@@ -42,7 +40,7 @@ class VideoFeedThread(QRunnable):
         mp_drawing = mp.solutions.drawing_utils
 
         # Initialize Segmentaton Model
-        model = YOLO(r'yolo_seg.pt')
+        model = YOLO(args.YOLO_SEG_MODEL_PATH)
 
         while self.process_started:
             ret, frame = self.cap.read()
@@ -52,35 +50,17 @@ class VideoFeedThread(QRunnable):
                 break
             
             frame = cv2.resize(frame, dsize=(640,480))
-            raw_frame = frame.copy()
             display_frame = frame.copy()
-            # print(display_frame.shape)
 
             # Get Mask
             if not mask_available:
-                # print("Mask Checking......")
-                # yolo_results = model(frame, verbose=False)
-                # country_masks = yolo_results[0].masks.data.cpu().numpy()
-                # detection_scores = yolo_results[0].boxes.conf.numpy()
-                
-                # if np.all(detection_scores > 0.5) and len(yolo_results[0]) == 8:
-                #     mask_available = True
-
                 print("Mask Checking......")
                 yolo_results = model(frame, verbose=True)
                 country_masks = yolo_results[0].masks.data.cpu().numpy()
-                # detection_scores = yolo_results[0].boxes.conf.numpy()
-                
-                # if np.all(detection_scores > 0.5) and len(yolo_results[0]) == 8:
+
                 mask_available = True
 
-                # display_frame = yolo_results[0].plot()
-            # out_frame = self.create_out_frame(raw_frame)
-            # self.signals.raw_image_signal.emit(out_frame)
-
-            # # mask_available = True
             if mask_available:
-                # Convert the BGR image to RGB
                 image_h = frame.shape[0]
                 image_w = frame.shape[1]
                 rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -90,9 +70,7 @@ class VideoFeedThread(QRunnable):
 
                 all_fingers_up = False
                 index_and_middle_up = False
-                index_up            = False
 
-                # camera_ready_signal = []
                 # Check if hand landmarks are detected
                 if results.multi_hand_landmarks:
                     for hand_landmarks in results.multi_hand_landmarks:
@@ -107,6 +85,7 @@ class VideoFeedThread(QRunnable):
                         }
 
                         # Check specific combinations
+                        # change by checking the results if you want
                         num_fingers_raised = sum(fingers_raised.values())
                         if num_fingers_raised == 5:
                             all_fingers_up = True
@@ -114,28 +93,24 @@ class VideoFeedThread(QRunnable):
                             index_and_middle_up = True
                         
                         if all_fingers_up:
-                            print(f"All fingers are up")
+                            # print(f"All fingers are up")
                             self.signals.pause_signal.emit()
                         elif index_and_middle_up:
-                            print(f"Only index and middle fingers are up")
+                            # print(f"Only index and middle fingers are up")
                             self.signals.hint_signal.emit()
                             
-
 
                         # Extract and print the coordinates of each finger tip (landmark index 4 for each finger)
                         for finger_tip in [4, 8, 12, 16, 20]:
                             x_cor, y_cor = int(hand_landmarks.landmark[finger_tip].x*image_w), int(hand_landmarks.landmark[finger_tip].y*image_h)
-                            # print(x_cor, y_cor)
                             cv2.circle(display_frame, (x_cor, y_cor), 15, (0,255,255), 2) 
 
                         if fingers_raised['index']:  # index finger up
                             x_index_cor, y_index_cor = int(hand_landmarks.landmark[8].x*image_w), int(hand_landmarks.landmark[8].y*image_h)
-                            # print(x_index_cor, y_index_cor)
                             cv2.circle(display_frame, (x_index_cor, y_index_cor), 12, (0,0,255), -1) 
-                            # print(type(country_masks))
-                            # self.signals.pointing_coordinate_signal.emit((x_index_cor, y_index_cor))
-                            # time.sleep(0.1)
-                            self.signals.pointing_coordinate_signal.emit(country_masks, (x_index_cor, y_index_cor))
+
+                            if not all_fingers_up and not index_and_middle_up:
+                                self.signals.pointing_coordinate_signal.emit(country_masks, (x_index_cor, y_index_cor))
 
 
                         # Draw lines connecting previous index finger coordinates
@@ -146,30 +121,12 @@ class VideoFeedThread(QRunnable):
 
                         # Draw hand landmarks on the frame
                         mp_drawing.draw_landmarks(display_frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
-                        # create image to show in the GUI
-                        # print(display_frame.shape)
-                        display_frame = self.create_out_frame(display_frame)
-                        self.signals.raw_image_signal.emit(display_frame)
-
-            # else:
-            #     # create image to show in the GUI
-            #     print(display_frame.shape)
-            #     display_frame = self.create_out_frame(display_frame)
-            #     self.signals.raw_image_signal.emit(display_frame)
-            #     self.signals.map_detected_signal.emit(False)
-
-
-            # create Raw image to show in the GUI
-            # out_frame = self.create_out_frame(raw_frame)
-            # self.signals.raw_image_signal.emit(out_frame)
-
-            # # create image to show in the GUI
-            # print(display_frame.shape)
-            # display_frame = self.create_out_frame(display_frame)
-            # self.signals.raw_image_signal.emit(display_frame)
+            
+            # create image to show in the GUI
+            display_frame = self.create_out_frame(display_frame)
+            self.signals.live_image_signal.emit(display_frame)
 
  
-    
     def stop_video_feed(self):
         self.process_started = False
 
