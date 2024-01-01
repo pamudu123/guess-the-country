@@ -29,8 +29,7 @@ class VideoFeedThread(QRunnable):
 
     @Slot()
     def run_realtime(self):
-        self.cap = cv2.VideoCapture(r'/home/pamudu/Desktop/Other_Projects/guess-the-country/GUI/d8.avi')
-        # self.cap = cv2.VideoCapture(args.CAMERA_IP)
+        self.cap = cv2.VideoCapture(args.CAMERA_IP)
 
         mask_available = False
 

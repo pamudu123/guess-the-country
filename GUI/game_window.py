@@ -12,7 +12,7 @@ from PySide6.QtWidgets import QApplication, QMainWindow
 ## import custom functions
 from GameWindow import Ui_GameWindow
 from Q_Loader import CountryDescriptionReader
-from video_capture_thread3 import VideoFeedThread
+from video_capture_thread import VideoFeedThread
 import args
 
 
@@ -22,7 +22,7 @@ class GameWindow(QMainWindow, Ui_GameWindow):
         self.setupUi(self)
         self.show()
 
-        # self.showMaximized()
+        self.showMaximized()
 
         # Set up the timer
         self.timer = QTimer(self)
@@ -61,6 +61,8 @@ class GameWindow(QMainWindow, Ui_GameWindow):
 
         self.n_correct_label.setAlignment(Qt.AlignCenter)
         self.n_wrong_label.setAlignment(Qt.AlignCenter)
+        self.hint_txt.setReadOnly(True)
+
 
 
     ################ Display Image ################
@@ -240,9 +242,9 @@ class GameWindow(QMainWindow, Ui_GameWindow):
         self.close() 
 
         
-# ############################
-app = QApplication(sys.argv)
-w = GameWindow()
-app.exec()
+#############################
+# app = QApplication(sys.argv)
+# w = GameWindow()
+# app.exec()
 
 ## pyside6-uic gamewindow.ui -o GameWindow.py
