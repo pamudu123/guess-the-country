@@ -9,6 +9,7 @@ Application/video_capture_thread4.py
 Application/d8.avi
 Application/video_
 Application/working_code
+Application/resource_files/yolo_seg.pt
 masks.npy
 
 
