@@ -69,7 +69,6 @@ class BoundingBoxToSegMaskConverter:
 
 
 
-
 if __name__ == "__main__":
     CLASSES = ['AUS', 'GREENLAND', 'INDIA', 'CANADA', 'USA', 'BRAZIL', 'CHINA', 'RUSSIA']
     model_path = r'Segmentation/sam_b.pt'

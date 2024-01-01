@@ -1,14 +1,19 @@
 Past/
 Segmentation/sam_b.pt
 frame_d2_150_jpg.rf.22e5f95e2b4cb9dc3a50184844020390.jpg
-GUI/other_files2
-GUI/other_files
-GUI/__pycache__
-GUI/Q_Loader2.py
-GUI/video_capture_thread4.py
-GUI/d8.avi
-GUI/video_
-GUI/working_code
+Application/other_files2
+Application/other_files
+Application/__pycache__
+Application/Q_Loader2.py
+Application/video_capture_thread4.py
+Application/d8.avi
+Application/video_
+Application/working_code
+masks.npy
+
+
+
+
 
 
 

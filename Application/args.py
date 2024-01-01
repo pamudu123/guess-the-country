@@ -20,8 +20,8 @@ COUNTRY_MAP_DICT = {0: 'USA', 1: 'AUS', 2: 'GREENLAND', 3: 'BRAZIL',
                     4: 'CANADA', 5: 'INDIA', 6: 'RUSSIA', 7: 'CHINA'}
 
 # Files
-QUESTION_FILE = r'/home/pamudu/Desktop/Other_Projects/guess-the-country/GUI/resource_files/country_descriptions.xlsx'
-YOLO_SEG_MODEL_PATH = r'/home/pamudu/Desktop/Other_Projects/guess-the-country/GUI/resource_files/yolo_seg.pt'
+QUESTION_FILE = r'Application/resource_files/country_descriptions.xlsx'
+YOLO_SEG_MODEL_PATH = r'Application/resource_files/yolo_seg.pt'
 
 
 
