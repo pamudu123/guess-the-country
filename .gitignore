@@ -11,7 +11,7 @@ Application/video_
 Application/working_code
 Application/resource_files/yolo_seg.pt
 masks.npy
-
+yolo_seg.pt
 
 
 
