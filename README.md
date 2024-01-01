@@ -18,7 +18,7 @@
 
 1. Clone the repository: `git clone https://github.com/pamudu123/guess-the-country.git`
 2. Install dependencies: `pip install -r requirements.txt`
-4. Run the training script: `python Application/info_window.py`
+4. Run the game: `python Application/info_window.py`
 
 
 ## Note
